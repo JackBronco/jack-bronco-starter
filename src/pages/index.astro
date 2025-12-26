@@ -1,11 +1,11 @@
 ---
 ---
-
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Jack Bronco</title>
+
     <style>
       html, body {
         margin: 0;
@@ -14,7 +14,6 @@
         background: #000;
         color: #eaeaea;
         font-family: Georgia, "Times New Roman", serif;
-        overflow: hidden; /* so stars don't create scrollbars */
       }
 
       .container {
@@ -23,143 +22,48 @@
         align-items: center;
         justify-content: center;
         text-align: center;
-        position: relative;
-        padding: 2rem;
       }
 
-      .stack {
-        max-width: 60ch;
+      /* Base animation control */
+      .part {
+        opacity: 0;
+        animation: fadeIn 3s ease forwards;
       }
 
       .line {
         font-size: clamp(1.4rem, 3vw, 2.2rem);
         letter-spacing: 0.02em;
-        opacity: 0;
-        animation: fadeIn 3s ease forwards;
       }
 
-      /* beats */
-      .line-2 { animation-delay: 4.0s; }
-      .line-3 { animation-delay: 7.0s; }
+      /* Timing sequence */
+      .part-1 { animation-delay: 1s; }     /* You weren’t supposed to be here */
+      .part-2 { animation-delay: 4.2s; }   /* yet. */
+      .part-3 { animation-delay: 8s; }     /* laughter */
 
       .laughter {
         margin-top: 1.5rem;
         font-size: 1rem;
-        opacity: 0;
-        animation: fadeIn 3s ease forwards;
-        animation-delay: 10.0s;
+        color: #cfcfcf; /* subtle, ominous */
       }
 
       @keyframes fadeIn {
         to { opacity: 1; }
       }
-
-      /* --- Stars --- */
-      .stars {
-        position: absolute;
-        inset: 0;
-        pointer-events: none; /* container doesn't block clicks */
-      }
-
-      .star {
-        pointer-events: auto; /* individual star IS clickable */
-        position: absolute;
-        width: 6px;
-        height: 6px;
-        border-radius: 999px;
-        background: rgba(255,255,255,0.9);
-        box-shadow: 0 0 10px rgba(255,255,255,0.55);
-        opacity: 0;
-        transform: scale(1);
-        transition: transform 180ms ease, opacity 600ms ease;
-        animation: twinkle 2.8s ease-in-out infinite;
-      }
-
-      .star:hover {
-        transform: scale(2.4);
-      }
-
-      @keyframes twinkle {
-        0%, 100% { filter: brightness(0.8); opacity: 0.55; }
-        50%      { filter: brightness(1.25); opacity: 1; }
-      }
-
-      /* optional: tiny hint text for accessibility / focus */
-      .star:focus-visible {
-        outline: 2px solid rgba(255,255,255,0.65);
-        outline-offset: 4px;
-      }
     </style>
   </head>
+
   <body>
     <div class="container">
-      <div class="stars" id="stars"></div>
-
-      <div class="stack">
-        <div class="line line-1">
-          <span>You weren’t supposed to be here</span><span> yet.</span>
+      <div>
+        <div class="line">
+          <span class="part part-1">You weren’t supposed to be here</span>
+          <span class="part part-2"> yet.</span>
         </div>
 
-        <div class="line line-2">But since you are…</div>
-
-        <div class="line line-3">Twinkle, twinkle little star.</div>
-
-        <div class="laughter">a low, slow, deep laugh rumbles…</div>
+        <div class="laughter part part-3">
+          a low, slow, deep laugh rumbles…
+        </div>
       </div>
     </div>
-
-    <script>
-      // Where the star(s) should link to:
-      const STAR_LINK = "/door/"; // change later (or "chapter-1.html", etc.)
-
-      const starsLayer = document.getElementById("stars");
-
-      function rand(min, max) {
-        return Math.random() * (max - min) + min;
-      }
-
-      function createStar() {
-        const a = document.createElement("a");
-        a.href = STAR_LINK;
-        a.className = "star";
-        a.setAttribute("aria-label", "A small light");
-
-        // place it somewhere pleasing (avoid very center where text is)
-        const x = rand(10, 90); // %
-        const y = rand(12, 88); // %
-
-        a.style.left = x + "%";
-        a.style.top = y + "%";
-
-        // vary twinkle speed a little
-        a.style.animationDuration = rand(2.2, 4.2) + "s";
-
-        starsLayer.appendChild(a);
-
-        // fade in
-        requestAnimationFrame(() => { a.style.opacity = "1"; });
-      }
-
-      // Timeline:
-      // 0s   first line begins (already handled by CSS)
-      // 4s   "But since you are…"
-      // 7s   "Twinkle…"
-      // 9s   first star appears
-      // 12s+ more stars slowly, optionally
-      window.setTimeout(createStar, 9000);
-
-      // Optional: slowly add more stars over time (cap them)
-      const MAX_STARS = 7;
-      window.setTimeout(() => {
-        const interval = window.setInterval(() => {
-          const count = starsLayer.querySelectorAll(".star").length;
-          if (count >= MAX_STARS) {
-            window.clearInterval(interval);
-            return;
-          }
-          createStar();
-        }, 3500);
-      }, 12000);
-    </script>
   </body>
 </html>
