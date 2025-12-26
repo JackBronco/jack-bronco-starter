@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Jack Bronco</title>
+
     <style>
       html, body {
         margin: 0;
@@ -23,28 +24,26 @@
         text-align: center;
       }
 
-      /* Base fade behavior for any staged element */
+      /* Base animation control */
       .part {
         opacity: 0;
         animation: fadeIn 3s ease forwards;
       }
 
-      /* Main line styling */
       .line {
         font-size: clamp(1.4rem, 3vw, 2.2rem);
         letter-spacing: 0.02em;
       }
 
-      /* Timing */
-      .part-1 { animation-delay: 1s; }     /* "You weren’t supposed to be here" */
-      .part-2 { animation-delay: 4.2s; }   /* " yet." */
-      .part-3 { animation-delay: 8s; }     /* laughter line */
+      /* Timing sequence */
+      .part-1 { animation-delay: 1s; }     /* You weren’t supposed to be here */
+      .part-2 { animation-delay: 4.2s; }   /* yet. */
+      .part-3 { animation-delay: 8s; }     /* laughter */
 
-      /* Laughter styling */
       .laughter {
         margin-top: 1.5rem;
         font-size: 1rem;
-        opacity: 0.85; /* slight dim */
+        color: #cfcfcf; /* subtle, ominous */
       }
 
       @keyframes fadeIn {
