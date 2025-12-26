@@ -23,19 +23,28 @@
         text-align: center;
       }
 
-      .line {
-        font-size: clamp(1.4rem, 3vw, 2.2rem);
-        letter-spacing: 0.02em;
+      /* Base fade behavior for any staged element */
+      .part {
         opacity: 0;
         animation: fadeIn 3s ease forwards;
       }
 
+      /* Main line styling */
+      .line {
+        font-size: clamp(1.4rem, 3vw, 2.2rem);
+        letter-spacing: 0.02em;
+      }
+
+      /* Timing */
+      .part-1 { animation-delay: 1s; }     /* "You weren’t supposed to be here" */
+      .part-2 { animation-delay: 4.2s; }   /* " yet." */
+      .part-3 { animation-delay: 8s; }     /* laughter line */
+
+      /* Laughter styling */
       .laughter {
         margin-top: 1.5rem;
         font-size: 1rem;
-        opacity: 0;
-        animation: fadeIn 3s ease forwards;
-        animation-delay: 4s;
+        opacity: 0.85; /* slight dim */
       }
 
       @keyframes fadeIn {
@@ -43,14 +52,17 @@
       }
     </style>
   </head>
+
   <body>
     <div class="container">
       <div>
         <div class="line">
-          You weren’t supposed to be here yet.
+          <span class="part part-1">You weren’t supposed to be here</span>
+          <span class="part part-2"> yet.</span>
         </div>
-        <div class="laughter">
-          a low, slow, deep laugh rumbles...
+
+        <div class="laughter part part-3">
+          a low, slow, deep laugh rumbles…
         </div>
       </div>
     </div>
