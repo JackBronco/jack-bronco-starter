@@ -34,15 +34,16 @@
         font-size: clamp(1.4rem, 3vw, 2.2rem);
         letter-spacing: 0.02em;
         opacity: 0;
-        animation: fadeIn 3s ease forwards;
+        animation: fadeIn 2s ease forwards,
+        fadeOut 2s ease forwards;
       }
 
       /* beats */
-      .part-1 { animation-delay: 1s; }    /* You weren’t supposed to be here */
-      .part-2 { animation-delay: 2.8s; }  /* yet. */
-      .part-3 { animation-delay: 5.6s; }  /* But since you are… */
-      .part-4 { animation-delay: 7.2s; }  /* Twinkle, twinkle little star. */
-      .part-5 { animation-delay: 10.2s; } /* laughter */
+      .part-1 { animation-delay: 1s, 9s; }    /* You weren’t supposed to be here */
+      .part-2 { animation-delay: 2.8s, 10s; }  /* yet. */
+      .part-3 { animation-delay: 5.6s, 11.2s; }  /* But since you are… */
+      .part-4 { animation-delay: 7.2s, 12.4; }  /* Twinkle, twinkle little star. */
+      .part-5 { animation-delay: 10.2s, 14s; } /* laughter */
 
 
       .laughter {
