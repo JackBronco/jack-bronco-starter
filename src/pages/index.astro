@@ -69,23 +69,22 @@
       .stars {
         position: absolute;
         inset: 0;
-        pointer-events: none; /* container doesn't block clicks */
+        pointer-events: auto; /* container doesn't block clicks */
         z-index: 3;
       }
 
       .star {
-        pointer-events: auto; /* individual star IS clickable */
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        border-radius: 999px;
-        background: rgba(255,255,255,0.9);
-        box-shadow: 0 0 10px rgba(255,255,255,0.55);
-        opacity: 0;
-        transform: scale(1);
-        transition: transform 180ms ease, opacity 600ms ease;
-        animation: twinkle 2.8s ease-in-out infinite;
-        z-index: 3;
+        display: block;
+  pointer-events: auto;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 0 14px rgba(255,255,255,0.75);
+  opacity: 1;                 /* TEMP: make it undeniable */
+  transform: translate(-50%, -50%) scale(1);
+  animation: twinkle 2.8s ease-in-out infinite;
       }
 
       .star:hover {
