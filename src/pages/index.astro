@@ -160,6 +160,7 @@
 
       // Optional: slowly add more stars over time (cap them)
       const MAX_STARS = 7;
+      createStar();
       window.setTimeout(() => {
         const interval = window.setInterval(() => {
           const count = starsLayer.querySelectorAll(".star").length;
