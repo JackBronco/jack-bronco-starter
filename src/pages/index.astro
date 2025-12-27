@@ -120,58 +120,44 @@
     </div>
 
     <script>
-      // Where the star(s) should link to:
-      const STAR_LINK = "/door/"; // change later (or "chapter-1.html", etc.)
+ const STAR_LINK = "/door/";
+  const starsLayer = document.getElementById("stars");
 
-      const starsLayer = document.getElementById("stars");
+  console.log("⭐ stars script loaded", { starsLayer });
 
-      function rand(min, max) {
-        return Math.random() * (max - min) + min;
-      }
+  function rand(min, max) {
+    return Math.random() * (max - min) + min;
+  }
 
-      function createStar() {
-        const a = document.createElement("a");
-        a.href = STAR_LINK;
-        a.className = "star";
-        a.setAttribute("aria-label", "A small light");
+  function createStar() {
+    if (!starsLayer) {
+      console.error("No #stars element found");
+      return;
+    }
 
-        // place it somewhere pleasing (avoid very center where text is)
-        const x = 50;
-        const y = 50;
+    const a = document.createElement("a");
+    a.href = STAR_LINK;
+    a.className = "star";
+    a.setAttribute("aria-label", "A small light");
 
-        a.style.left = x + "%";
-        a.style.top = y + "%";
+    // dead-center test
+    a.style.left = "50%";
+    a.style.top = "50%";
+    a.style.transform = "translate(-50%, -50%) scale(1)";
 
-        // vary twinkle speed a little
-        a.style.animationDuration = rand(2.2, 4.2) + "s";
+    a.style.animationDuration = rand(2.2, 4.2) + "s";
 
-        starsLayer.appendChild(a);
+    starsLayer.appendChild(a);
+    console.log("⭐ star appended", a);
 
-        // fade in
-        requestAnimationFrame(() => { a.style.opacity = "1"; });
-      }
+    requestAnimationFrame(() => { a.style.opacity = "1"; });
+  }
 
-      // Timeline:
-      // 0s   first line begins (already handled by CSS)
-      // 4s   "But since you are…"
-      // 7s   "Twinkle…"
-      // 9s   first star appears
-      // 12s+ more stars slowly, optionally
-      window.setTimeout(createStar, 9000);
+  // test: immediate
+  createStar();
 
-      // Optional: slowly add more stars over time (cap them)
-      const MAX_STARS = 7;
-      createStar();
-      window.setTimeout(() => {
-        const interval = window.setInterval(() => {
-          const count = starsLayer.querySelectorAll(".star").length;
-          if (count >= MAX_STARS) {
-            window.clearInterval(interval);
-            return;
-          }
-          createStar();
-        }, 3500);
-      }, 12000);
+  // normal timeline
+  window.setTimeout(createStar, 9000);
     </script>
   </body>
 </html>
