@@ -28,6 +28,8 @@
 
       .stack {
         max-width: 60ch;
+        position: relative;
+        z-index: 2;
       }
 
       .line {
@@ -68,6 +70,7 @@
         position: absolute;
         inset: 0;
         pointer-events: none; /* container doesn't block clicks */
+        .stars { z-index: 1; }
       }
 
       .star {
