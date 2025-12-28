@@ -114,7 +114,7 @@
         border-radius: 999px;
         pointer-events: none;
         opacity: 0;
-        transition: opacity 140ms ease;
+        transition: opacity 180ms ease-out;
 
         /* "wtf?" warning without color-shift: bright edge, soft falloff */
         background: radial-gradient(
@@ -129,6 +129,7 @@
 
       :global(.field-glow.on) {
         opacity: 1;
+        transition: opacity 260ms ease-in;
       }
     </style>
   </head>
