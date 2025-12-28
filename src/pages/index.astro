@@ -1,19 +1,21 @@
-  ---
+---
 ---
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Jack Bronco</title>
+
     <style>
-      html, body {
+      html,
+      body {
         margin: 0;
         padding: 0;
         height: 100%;
         background: #000;
         color: #eaeaea;
         font-family: Georgia, "Times New Roman", serif;
-        overflow: hidden; /* so stars don't create scrollbars */
+        overflow: hidden; /* prevent stars from creating scrollbars */
       }
 
       .container {
@@ -36,40 +38,48 @@
         font-size: clamp(1.4rem, 3vw, 2.2rem);
         letter-spacing: 0.02em;
         opacity: 0;
-        animation: fadeIn 2s ease forwards,
-        fadeOut 2s ease forwards;
+        animation: fadeIn 2s ease forwards, fadeOut 2s ease forwards;
       }
 
       /* beats */
-      .part-1 { animation-delay: 1s, 9s; }    /* You weren’t supposed to be here */
-      .part-2 { animation-delay: 2.8s, 10s; }  /* yet. */
-      .part-3 { animation-delay: 5.6s, 11.2s; }  /* But since you are… */
-      .part-4 { animation-delay: 7.2s, 12.4s; }  /* Twinkle, twinkle little star. */
-      .part-5 { animation-delay: 10.2s, 14s; } /* laughter */
-
+      .part-1 {
+        animation-delay: 1s, 9s;
+      } /* You weren’t supposed to be here */
+      .part-2 {
+        animation-delay: 2.8s, 10s;
+      } /* yet. */
+      .part-3 {
+        animation-delay: 5.6s, 11.2s;
+      } /* But since you are… */
+      .part-4 {
+        animation-delay: 7.2s, 12.4s;
+      } /* Twinkle, twinkle little star. */
 
       .laughter {
         margin-top: 1.5rem;
         font-size: 1rem;
         opacity: 0;
-        animation: fadeIn 3s ease forwards,
-        fadeOut 2s ease forwards;
-        animation-delay: 10.0s, 14s;
+        animation: fadeIn 3s ease forwards, fadeOut 2s ease forwards;
+        animation-delay: 10s, 14s;
       }
 
       @keyframes fadeIn {
-        to { opacity: 1; }
+        to {
+          opacity: 1;
+        }
       }
 
       @keyframes fadeOut {
-        to { opacity: 0; }
+        to {
+          opacity: 0;
+        }
       }
 
-/* --- Stars --- */
+      /* --- Stars (global so JS-created elements get styled in Astro) --- */
       :global(.stars) {
         position: absolute;
         inset: 0;
-        z-index: 1;          /* behind text */
+        z-index: 1; /* behind text */
         pointer-events: none; /* container doesn't block */
       }
 
@@ -79,30 +89,35 @@
         width: 6px;
         height: 6px;
         border-radius: 999px;
-        background: rgba(255,255,255,0.9);
-        box-shadow: 0 0 10px rgba(255,255,255,0.55);
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.55);
         opacity: 0;
         transform: translate(-50%, -50%) scale(1);
         transition: transform 180ms ease, opacity 600ms ease;
         animation: twinkle 2.8s ease-in-out infinite;
-        }
-
-        :global(.star:hover) {
-          transform: translate(-50%, -50%) scale(2.4);
-        }
-
-      @keyframes twinkle {
-        0%, 100% { filter: brightness(0.8); }
-        50%      { filter: brightness(1.25); }
       }
 
-      /* optional: tiny hint text for accessibility / focus */
+      :global(.star:hover) {
+        transform: translate(-50%, -50%) scale(2.4);
+      }
+
       :global(.star:focus-visible) {
-        outline: 2px solid rgba(255,255,255,0.65);
+        outline: 2px solid rgba(255, 255, 255, 0.65);
         outline-offset: 4px;
+      }
+
+      @keyframes twinkle {
+        0%,
+        100% {
+          filter: brightness(0.8);
+        }
+        50% {
+          filter: brightness(1.25);
+        }
       }
     </style>
   </head>
+
   <body>
     <div class="container">
       <div class="stars" id="stars"></div>
@@ -119,43 +134,40 @@
     </div>
 
     <script>
- const STAR_LINK = "/door/";
-  const starsLayer = document.getElementById("stars");
+      document.addEventListener("DOMContentLoaded", () => {
+        const STAR_LINK = "/door/";
+        const starsLayer = document.getElementById("stars");
 
-  console.log("⭐ stars script loaded", { starsLayer });
+        function rand(min, max) {
+          return Math.random() * (max - min) + min;
+        }
 
-  function rand(min, max) {
-    return Math.random() * (max - min) + min;
-  }
+        function createStar() {
+          if (!starsLayer) return;
 
-  function createStar() {
-    if (!starsLayer) {
-      console.error("No #stars element found");
-      return;
-    }
+          const a = document.createElement("a");
+          a.href = STAR_LINK;
+          a.className = "star";
+          a.setAttribute("aria-label", "A small light");
 
-    const a = document.createElement("a");
-    a.href = STAR_LINK;
-    a.className = "star";
-    a.setAttribute("aria-label", "A small light");
+          // centered (we'll do placement next)
+          a.style.left = "50%";
+          a.style.top = "50%";
 
-    // dead-center test
-    a.style.left = "50%";
-    a.style.top = "50%";
-    a.style.transform = "translate(-50%, -50%) scale(1)";
+          // vary twinkle speed a little
+          a.style.animationDuration = rand(2.2, 4.2) + "s";
 
-    a.style.animationDuration = rand(2.2, 4.2) + "s";
+          starsLayer.appendChild(a);
 
-    starsLayer.appendChild(a);
-    console.log("⭐ star appended", a);
+          // fade in
+          requestAnimationFrame(() => {
+            a.style.opacity = "1";
+          });
+        }
 
-    requestAnimationFrame(() => { a.style.opacity = "1"; });
-  }
-
-
-
-  // normal timeline
-  window.setTimeout(createStar, 13500);
+        // Star timing (synced to your twinkle fade-out moment)
+        window.setTimeout(createStar, 13500);
+      });
     </script>
   </body>
 </html>
