@@ -55,6 +55,17 @@ const description = "A quiet place. Not everything needs to be explained.";
         background: #eaeaea;
         color: #0a0a0a;
       }
+
+      .hidden {
+      opacity: 0;
+      transform: translateY(10px);
+      }
+
+.show {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
     </style>
   </head>
 
@@ -73,9 +84,18 @@ const description = "A quiet place. Not everything needs to be explained.";
         target="_blank"
         rel="noopener noreferrer"
         class="button"
+        id="amazonBtn"
       >
         Read Free with KU or Buy on Amazon
       </a>
     </main>
+    
+    <script>
+    setTimeout(() => {
+    const btn = document.getElementById("amazonBtn");
+    btn.classList.add("show");
+    }, 1800); // delay in milliseconds (1.8 seconds)
+    </script>
+
   </body>
 </html>
