@@ -7,13 +7,15 @@
     <title>Jack Bronco</title>
 
     <style>
-      html, body {
+      html,
+      body {
         margin: 0;
         padding: 0;
         height: 100%;
         background: #000;
         color: #eaeaea;
         font-family: Georgia, "Times New Roman", serif;
+        overflow: hidden; /* prevent stars from creating scrollbars */
       }
 
       .container {
@@ -22,48 +24,221 @@
         align-items: center;
         justify-content: center;
         text-align: center;
+        position: relative;
+        padding: 2rem;
       }
 
-      /* Base animation control */
-      .part {
-        opacity: 0;
-        animation: fadeIn 3s ease forwards;
+      .stack {
+        max-width: 60ch;
+        position: relative;
+        z-index: 2;
       }
 
       .line {
         font-size: clamp(1.4rem, 3vw, 2.2rem);
         letter-spacing: 0.02em;
+        opacity: 0;
+        animation: fadeIn 2s ease forwards, fadeOut 2s ease forwards;
       }
 
-      /* Timing sequence */
-      .part-1 { animation-delay: 1s; }     /* You weren’t supposed to be here */
-      .part-2 { animation-delay: 4.2s; }   /* yet. */
-      .part-3 { animation-delay: 8s; }     /* laughter */
+      /* beats */
+      .part-1 { animation-delay: 1s, 9s; }      /* You weren’t supposed to be here */
+      .part-2 { animation-delay: 2.8s, 10s; }   /* yet. */
+      .part-3 { animation-delay: 5.6s, 11.2s; } /* But since you are… */
+      .part-4 { animation-delay: 7.2s, 12.4s; } /* Twinkle, twinkle little star. */
 
       .laughter {
         margin-top: 1.5rem;
         font-size: 1rem;
-        color: #cfcfcf; /* subtle, ominous */
+        opacity: 0;
+        animation: fadeIn 3s ease forwards, fadeOut 4s ease forwards;
+        animation-delay: 12.4s, 18s;
       }
 
-      @keyframes fadeIn {
-        to { opacity: 1; }
+      @keyframes fadeIn { to { opacity: 1; } }
+      @keyframes fadeOut { to { opacity: 0; } }
+
+      /* --- Stars (global so JS-created elements get styled in Astro) --- */
+      :global(.stars) {
+        position: absolute;
+        inset: 0;
+        z-index: 1; /* behind text */
+        pointer-events: none; /* container doesn't block */
+      }
+
+      :global(.star) {
+        pointer-events: auto; /* the star itself is clickable */
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.55);
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1);
+        transition: transform 180ms ease, opacity 600ms ease;
+        animation: twinkle 2.8s ease-in-out infinite;
+      }
+
+      :global(.star:hover) {
+        transform: translate(-50%, -50%) scale(2.4);
+      }
+
+      :global(.star:focus-visible) {
+        outline: 2px solid rgba(255, 255, 255, 0.65);
+        outline-offset: 4px;
+      }
+
+      @keyframes twinkle {
+        0%,
+        100% {
+          transform: translate(-50%, -50%) scale(0.85);
+          box-shadow: 0 0 6px rgba(255, 255, 255, 0.25);
+          filter: brightness(0.8);
+        }
+        50% {
+          transform: translate(-50%, -50%) scale(1.15);
+          box-shadow: 0 0 16px rgba(255, 255, 255, 0.85);
+          filter: brightness(1.6);
+        }
+      }
+
+      /* --- Boundary Glow (warning field) --- */
+      :global(.field-glow) {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 260px;             /* visual size of the glow */
+        height: 260px;
+        transform: translate(-50%, -50%);
+        border-radius: 999px;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 180ms ease-out;
+
+        /* "wtf?" warning without color-shift: bright edge, soft falloff */
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.00) 0%,
+          rgba(255, 255, 255, 0.04) 25%,
+          rgba(255, 255, 255, 0.14) 45%,
+          rgba(255, 255, 255, 0.00) 70%
+        );
+        filter: blur(0.2px);
+      }
+
+      :global(.field-glow.on) {
+        opacity: 1;
+        transition: opacity 260ms ease-in;
       }
     </style>
   </head>
 
   <body>
     <div class="container">
-      <div>
-        <div class="line">
-          <span class="part part-1">You weren’t supposed to be here</span>
-          <span class="part part-2"> yet.</span>
-        </div>
+      <div class="stars" id="stars"></div>
 
-        <div class="laughter part part-3">
-          a low, slow, deep laugh rumbles…
-        </div>
+      <div class="stack">
+        <div class="line part-1">You weren’t supposed to be here</div>
+        <div class="line part-2">yet.</div>
+
+        <div class="line part-3">But since you are…</div>
+        <div class="line part-4">Twinkle, twinkle little star.</div>
+
+        <div class="laughter">a low, slow, deep laugh rumbles…</div>
       </div>
     </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const STAR_LINK = "/door/";
+        const starsLayer = document.getElementById("stars");
+
+        // Starter tuning values (we’ll refine after you feel it)
+        const OUTER_RADIUS_PX = 180; // red-circle-ish boundary
+        const INNER_RADIUS_PX = 10;  // "past the veil" zone (glow disappears)
+
+        function rand(min, max) {
+          return Math.random() * (max - min) + min;
+        }
+
+        let starEl = null;
+        let glowEl = null;
+
+        function ensureGlow() {
+          if (glowEl) return glowEl;
+          glowEl = document.createElement("div");
+          glowEl.className = "field-glow";
+          starsLayer.appendChild(glowEl);
+          return glowEl;
+        }
+
+        function getStarCenterPx() {
+          if (!starEl) return null;
+          const r = starEl.getBoundingClientRect();
+          return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+        }
+
+        function setGlowState(isOn) {
+          if (!glowEl) return;
+          glowEl.classList.toggle("on", isOn);
+        }
+
+        function handlePointerMove(clientX, clientY) {
+          if (!starEl || !glowEl) return;
+
+          const c = getStarCenterPx();
+          if (!c) return;
+
+          const dx = clientX - c.x;
+          const dy = clientY - c.y;
+          const d = Math.hypot(dx, dy);
+
+          // Glow only in the boundary band: INNER..OUTER
+          const inBand = d <= OUTER_RADIUS_PX && d >= INNER_RADIUS_PX;
+
+          // If you cross inward (d < INNER), the glow vanishes (inviting silence)
+          setGlowState(inBand);
+        }
+
+        function createStar() {
+          if (!starsLayer) return;
+
+          const a = document.createElement("a");
+          a.href = STAR_LINK;
+          a.className = "star";
+          a.setAttribute("aria-label", "A small light");
+
+          // centered (we'll do placement next)
+          a.style.left = "50%";
+          a.style.top = "50%";
+
+          // vary twinkle speed a little
+          a.style.animationDuration = rand(2.2, 4.2) + "s";
+
+          starsLayer.appendChild(a);
+          starEl = a;
+
+          // Create the boundary glow (dormant until pointer enters band)
+          ensureGlow();
+
+          // fade in star
+          requestAnimationFrame(() => {
+            a.style.opacity = "1";
+          });
+
+          // Pointer proximity tracking (mouse + touch + pen)
+          window.addEventListener("pointermove", (e) => {
+            handlePointerMove(e.clientX, e.clientY);
+          }, { passive: true });
+
+          // If pointer leaves window, "sleep"
+          window.addEventListener("blur", () => setGlowState(false));
+        }
+
+        // Star timing (synced to your twinkle fade-out moment)
+        window.setTimeout(createStar, 13500);
+      });
+    </script>
   </body>
 </html>
