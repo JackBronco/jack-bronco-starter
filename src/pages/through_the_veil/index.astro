@@ -57,23 +57,23 @@ const description = "A quiet place. Not everything needs to be explained.";
       }
 
       .hidden {
-      opacity: 0;
-      transform: translateY(10px);
+        opacity: 0;
+        transform: translateY(10px);
       }
 
       .show {
-      opacity: 1;
-      transform: translateY(0);
-      transition: opacity 0.8s ease, transform 0.8s ease;
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 0.8s ease, transform 0.8s ease;
       }
     </style>
   </head>
 
   <body>
     <main>
-      <h1>Through the Veil</h1>
+      <h1 class="hidden" id="pageTitle">Through the Veil</h1>
 
-      <p>
+      <p class="hidden" id="pageText">
         You found it.<br /><br />
         Not everything is meant to be explained right away.<br /><br />
         Some things are meant to be stepped into.
@@ -89,13 +89,22 @@ const description = "A quiet place. Not everything needs to be explained.";
         Read Free with KU or Buy on Amazon
       </a>
     </main>
-    
-    <script>
-    setTimeout(() => {
-    const btn = document.getElementById("amazonBtn");
-    btn.classList.add("show");
-    }, 1800); // delay in milliseconds (1.8 seconds)
-    </script>
 
+    <script>
+      setTimeout(() => {
+        document.getElementById("pageTitle")?.classList.remove("hidden");
+        document.getElementById("pageTitle")?.classList.add("show");
+      }, 400);
+
+      setTimeout(() => {
+        document.getElementById("pageText")?.classList.remove("hidden");
+        document.getElementById("pageText")?.classList.add("show");
+      }, 1100);
+
+      setTimeout(() => {
+        document.getElementById("amazonBtn")?.classList.remove("hidden");
+        document.getElementById("amazonBtn")?.classList.add("show");
+      }, 2100);
+    </script>
   </body>
 </html>
