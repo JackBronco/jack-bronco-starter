@@ -9,6 +9,7 @@ const description = "A quiet place. Not everything needs to be explained.";
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+
     <style>
       body {
         margin: 0;
@@ -37,18 +38,44 @@ const description = "A quiet place. Not everything needs to be explained.";
         opacity: 0.7;
         line-height: 1.6;
       }
+
+      .button {
+        display: inline-block;
+        margin-top: 2.5rem;
+        padding: 0.85rem 1.4rem;
+        border: 1px solid #eaeaea;
+        color: #eaeaea;
+        text-decoration: none;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+        transition: background 0.2s ease, color 0.2s ease;
+      }
+
+      .button:hover {
+        background: #eaeaea;
+        color: #0a0a0a;
+      }
     </style>
   </head>
 
   <body>
     <main>
       <h1>Through the Veil</h1>
+
       <p>
         You found it.<br /><br />
         Not everything is meant to be explained right away.<br /><br />
         Some things are meant to be stepped into.
-        ha ha ha !HA
       </p>
+
+      <a
+        href="https://www.amazon.com/dp/B0GCM12FFJ"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="button"
+      >
+        Read Free with KU or Buy on Amazon
+      </a>
     </main>
   </body>
 </html>
