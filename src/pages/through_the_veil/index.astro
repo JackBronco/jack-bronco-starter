@@ -115,11 +115,16 @@ const description = "A quiet place. Not everything needs to be explained.";
 
   <body>
     <main>
-      <h1 class="hidden" id="pageTitle">Through the Veil</h1>
+      <h1 class="hidden" id="pageTitle">Through The Veil</h1>
 
-      <p class="hidden" id="pageText">
-        You found it.<br /><br />
-        Not everything is meant to be explained right away.<br /><br />
+      <p class="hidden" id="line1">
+        You found it.
+      </p>
+        <br /><br />
+      <p class="hidden" id="line2">
+        Not everything is meant to be explained right away.
+      </p>
+        <br /><br />
       <span class="blurb">
         The veil between Light and Dark isn’t a myth—it’s real, hidden in plain
         sight on our own Earth.
@@ -136,6 +141,7 @@ const description = "A quiet place. Not everything needs to be explained.";
         life with those he loves.
       </span>      
         <br /><br />
+       <p class="hidden" id="line3"> 
         Some things are meant to be stepped into.
       </p>
 
@@ -171,19 +177,34 @@ const description = "A quiet place. Not everything needs to be explained.";
       }, 400);
 
       setTimeout(() => {
-        document.getElementById("pageText")?.classList.remove("hidden");
-        document.getElementById("pageText")?.classList.add("show");
+        document.getElementById("line1")?.classList.remove("hidden");
+        document.getElementById("line1")?.classList.add("show");
       }, 1800);
+
+      setTimeout(() => {
+        document.getElementById("line2")?.classList.remove("hidden");
+        document.getElementById("line2")?.classList.add("show");
+      }, 2200);
+
+      setTimeout(() => {
+        document.getElementById("blurb")?.classList.remove("hidden");
+        document.getElementById("blurb")?.classList.add("show");
+      }, 2600);
+
+ setTimeout(() => {
+        document.getElementById("line3")?.classList.remove("hidden");
+        document.getElementById("line3")?.classList.add("show");
+      }, 3900);
 
       setTimeout(() => {
         document.getElementById("amazonBtn")?.classList.remove("hidden");
         document.getElementById("amazonBtn")?.classList.add("show");
-      }, 3900);
+      }, 4200);
 
       setTimeout(() => {
         document.getElementById("amazonProof")?.classList.remove("hidden");
         document.getElementById("amazonProof")?.classList.add("show");
-      }, 5200);
+      }, 4400);
     </script>
   </body>
 
