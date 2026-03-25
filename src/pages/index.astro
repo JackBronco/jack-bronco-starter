@@ -6,6 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Jack Bronco</title>
 
+    <meta name="description" content="Official website of Jack Bronco, author and publisher of gritty, fast-paced action thrillers infused with horror and supernatural elements." />
+
+    <meta name="keywords" content="Jack Bronco, Jack Bronco Publishing, Through the Veil, surreal fiction, dark narrative, horror fiction, gritty storytelling, supernatural thrillers" />
+
+    <meta name="author" content="Jack Bronco" />
+
+        <!-- Google tag (gtag.js) -->
+          <script async src="https://www.googletagmanager.com/gtag/js?id=G-QCRJ4E2VH2"></script>
+          <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-QCRJ4E2VH2');
+
     <style>
       html,
       body {
@@ -151,7 +166,7 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        const STAR_LINK = "/door/";
+        const STAR_LINK = "/through_the_veil/";
         const starsLayer = document.getElementById("stars");
 
         // Starter tuning values (we’ll refine after you feel it)
@@ -208,6 +223,15 @@
           a.href = STAR_LINK;
           a.className = "star";
           a.setAttribute("aria-label", "A small light");
+          a.addEventListener("click", () => {
+            if (typeof gtag === "function") {
+              gtag("event", "star_click", {
+                event_category: "engagement",
+                  event_label: "through_the_veil_entry"
+                });
+              }
+          });
+
 
           // centered (we'll do placement next)
           a.style.left = "50%";
