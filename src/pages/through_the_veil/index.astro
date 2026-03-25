@@ -110,6 +110,14 @@ const description = "A quiet place. Not everything needs to be explained.";
         margin: 1.5rem 0;
       }
 
+      .genre {
+        margin-top: 2rem;
+        font-size: 0.9rem; /* slightly larger */
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        opacity: 0.55;
+      }
+
 </style>
   </head>
 
@@ -143,6 +151,10 @@ const description = "A quiet place. Not everything needs to be explained.";
         
        <p class="hidden" id="line3"> 
         Some things are meant to be stepped into.
+      </p>
+
+      <p class="hidden genre" id="genreLine"> 
+        A Gritty Supernatural Thriller — with Horror and Heart
       </p>
 
       <a
@@ -195,6 +207,11 @@ const description = "A quiet place. Not everything needs to be explained.";
         document.getElementById("line3")?.classList.remove("hidden");
         document.getElementById("line3")?.classList.add("show");
       }, 4600);
+
+      setTimeout(() => {
+        document.getElementById("genreLine")?.classList.remove("hidden");
+        document.getElementById("genreLine")?.classList.add("show");
+      }, 5000);
 
       setTimeout(() => {
         document.getElementById("amazonBtn")?.classList.remove("hidden");
