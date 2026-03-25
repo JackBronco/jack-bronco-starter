@@ -78,11 +78,11 @@
       :.stars {
         position: absolute;
         inset: 0;
-        z-index: 3; /* behind text */
+        z-index: 1; /* behind text */
         pointer-events: auto; /* updated to auto now that another page exists */
       }
 
-      :.star {
+      .star {
         pointer-events: auto; /* the star itself is clickable */
         position: absolute;
         width: 10px;
@@ -96,11 +96,11 @@
         animation: twinkle 2.8s ease-in-out infinite;
       }
 
-      :.star:hover {
+      .star:hover {
         transform: translate(-50%, -50%) scale(2.4);
       }
 
-      :.star:focus-visible {
+      .star:focus-visible {
         outline: 2px solid rgba(255, 255, 255, 0.65);
         outline-offset: 4px;
       }
@@ -120,7 +120,7 @@
       }
 
       /* --- Boundary Glow (warning field) --- */
-      :.field-glow {
+      .field-glow {
         position: absolute;
         left: 50%;
         top: 50%;
@@ -143,7 +143,7 @@
         filter: blur(0.2px);
       }
 
-      :.field-glow.on {
+      .field-glow.on {
         opacity: 1;
         transition: opacity 260ms ease-in;
       }
