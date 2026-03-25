@@ -8,8 +8,14 @@ const description = "A quiet place. Not everything needs to be explained.";
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Through the Veil | Jack Bronco</title>
-    <meta name="description" content="Through the Veil by Jack Bronco. A supernatural thriller now available on Amazon. Read free with Kindle Unlimited or purchase." />
-    <meta name="keywords" content="Through the Veil, Jack Bronco, supernatural fiction, horror fiction, action thriller fiction">
+    <meta
+      name="description"
+      content="Through the Veil by Jack Bronco. A supernatural thriller now available on Amazon. Read free with Kindle Unlimited or purchase."
+    />
+    <meta
+      name="keywords"
+      content="Through the Veil, Jack Bronco, supernatural fiction, horror fiction, action thriller fiction"
+    />
 
     <style>
       body {
@@ -20,7 +26,7 @@ const description = "A quiet place. Not everything needs to be explained.";
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 100vh;
+        min-height: 100vh;
         text-align: center;
       }
 
@@ -67,6 +73,36 @@ const description = "A quiet place. Not everything needs to be explained.";
         transform: translateY(0);
         transition: opacity 0.8s ease, transform 0.8s ease;
       }
+
+      .amazon-proof {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+        margin-top: 2rem;
+        text-decoration: none;
+        color: #eaeaea;
+        max-width: 420px;
+      }
+
+      .amazon-proof img {
+        width: 100%;
+        height: auto;
+        border: 1px solid rgba(234, 234, 234, 0.2);
+        border-radius: 6px;
+        opacity: 0.9;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+      }
+
+      .amazon-proof span {
+        font-size: 0.85rem;
+        opacity: 0.55;
+      }
+
+      .amazon-proof:hover img {
+        opacity: 1;
+        transform: translateY(-2px);
+      }
     </style>
   </head>
 
@@ -77,13 +113,19 @@ const description = "A quiet place. Not everything needs to be explained.";
       <p class="hidden" id="pageText">
         You found it.<br /><br />
         Not everything is meant to be explained right away.<br /><br />
-        The veil between Light and Dark isn’t a myth—it’s real, hidden in plain sight on our own Earth.
+        The veil between Light and Dark isn’t a myth—it’s real, hidden in plain
+        sight on our own Earth.
         <br /><br />
-        When Cole stumbles across it and steps through, he discovers too late that return isn’t guaranteed.
+        When Cole stumbles across it and steps through, he discovers too late
+        that return isn’t guaranteed.
         <br /><br />
-        The two living souls he loves most are left behind on the other side… and every path home drags him deeper into a world shaped by shadows, predators, and choices with irreversible consequences.
+        The two living souls he loves most are left behind on the other side…
+        and every path home drags him deeper into a world shaped by shadows,
+        predators, and choices with irreversible consequences.
         <br /><br />
-        As he searches for a way back, Cole is forced to confront decisions that challenge his one driving desire: to return home and reclaim his simple life with those he loves.
+        As he searches for a way back, Cole is forced to confront decisions that
+        challenge his one driving desire: to return home and reclaim his simple
+        life with those he loves.
         <br /><br />
         Some things are meant to be stepped into.
       </p>
@@ -96,6 +138,20 @@ const description = "A quiet place. Not everything needs to be explained.";
         id="amazonBtn"
       >
         Read Free with KU or Buy on Amazon
+      </a>
+
+      <a
+        href="https://www.amazon.com/dp/B0GCM12FFJ"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="amazon-proof hidden"
+        id="amazonProof"
+      >
+        <img
+          src="/images/through-the-veil-amazon-preview.jpg"
+          alt="Amazon listing preview for Through the Veil by Jack Bronco"
+        />
+        <span>Amazon listing preview</span>
       </a>
     </main>
 
@@ -114,6 +170,11 @@ const description = "A quiet place. Not everything needs to be explained.";
         document.getElementById("amazonBtn")?.classList.remove("hidden");
         document.getElementById("amazonBtn")?.classList.add("show");
       }, 3900);
+
+      setTimeout(() => {
+        document.getElementById("amazonProof")?.classList.remove("hidden");
+        document.getElementById("amazonProof")?.classList.add("show");
+      }, 5200);
     </script>
   </body>
 </html>
