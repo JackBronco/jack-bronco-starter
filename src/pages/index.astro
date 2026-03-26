@@ -82,7 +82,7 @@
         pointer-events: auto; /* updated to auto now that another page exists */
       }
 
-      .star {
+      :global(.star) {
         display: block;
         pointer-events: auto; /* the star itself is clickable */
         position: absolute;
@@ -97,11 +97,11 @@
         animation: twinkle 2.8s ease-in-out infinite;
       }
 
-      .star:hover {
+      :global(.star:hover) {
         transform: translate(-50%, -50%) scale(2.4);
       }
 
-      .star:focus-visible {
+      :global(.star:focus-visible) {
         outline: 2px solid rgba(255, 255, 255, 0.65);
         outline-offset: 4px;
       }
@@ -121,7 +121,7 @@
       }
 
       /* --- Boundary Glow (warning field) --- */
-      .field-glow {
+      :global(.field-glow) {
         position: absolute;
         left: 50%;
         top: 50%;
@@ -144,7 +144,7 @@
         filter: blur(0.2px);
       }
 
-      .field-glow.on {
+      :global(.field-glow.on) {
         opacity: 1;
         transition: opacity 260ms ease-in;
       }
