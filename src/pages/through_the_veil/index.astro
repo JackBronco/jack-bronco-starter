@@ -173,7 +173,7 @@ const description = "A quiet place. Not everything needs to be explained.";
         rel="noopener noreferrer"
         class="button hidden"
         id="amazonBtn"
-        onclick="trackAmazonClick('button');"
+        onclick="trackAmazonClick('amazon_btn_click');"
       >
         Read Free with KU or Buy on Amazon
       </a>
@@ -184,7 +184,7 @@ const description = "A quiet place. Not everything needs to be explained.";
         rel="noopener noreferrer"
         class="amazon-proof hidden"
         id="amazonProof"
-        onclick="trackAmazonClick('button');"
+        onclick="trackAmazonClick('amazon_img_click');"
       >
         <img
           src="/images/through-the-veil-amazon-preview.jpg"
@@ -235,14 +235,10 @@ const description = "A quiet place. Not everything needs to be explained.";
         document.getElementById("amazonProof")?.classList.add("show");
       }, 5500);
 
-     window.trackAmazonClick = function(label) {
-      if (typeof gtag === 'function') {
-        gtag('event', 'amazon_click', {
-          event_category: 'engagement',
-            event_label: label,
-              transport_type: 'beacon'
-            });
-          }  
+      window.trackAmazonClick = function(eventName) {
+        if (typeof gtag === 'function') {
+          gtag('event', eventName);
+        }
       };
 
     </script>
