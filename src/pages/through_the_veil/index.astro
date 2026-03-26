@@ -235,14 +235,15 @@ const description = "A quiet place. Not everything needs to be explained.";
         document.getElementById("amazonProof")?.classList.add("show");
       }, 5500);
 
-      function trackAmazonClick(label) {
-        if (typeof gtag === 'function') {
+     window.trackAmazonClick = function(label) {
+      if (typeof gtag === 'function') {
         gtag('event', 'amazon_click', {
-        event_category: 'engagement',
-        event_label: label
-          });
-        }
-      }
+          event_category: 'engagement',
+            event_label: label,
+              transport_type: 'beacon'
+            });
+          }  
+      };
 
     </script>
   </body>
