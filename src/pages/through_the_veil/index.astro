@@ -251,9 +251,11 @@ const description = "A quiet place. Not everything needs to be explained.";
         document.getElementById("amazonProof")?.classList.add("show");
       }, 1800);
 
-      window.trackAmazonClick = function(eventName) {
+     window.trackAmazonClick = function() {
         if (typeof gtag === 'function') {
-          gtag('event', eventName);
+        gtag('event', 'conversion', {
+        'send_to': 'AW-988775825/84DWCLnc3f0BEJGIVtcd'
+        });
         }
       };
 
