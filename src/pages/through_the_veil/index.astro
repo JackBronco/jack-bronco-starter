@@ -20,13 +20,17 @@ const description = "A quiet place. Not everything needs to be explained.";
 
       <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-QCRJ4E2VH2"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
+          <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
 
-          gtag('config', 'G-QCRJ4E2VH2');
-        </script>
+            // GA4
+              gtag('config', 'G-QCRJ4E2VH2');
+
+            // Google Ads
+              gtag('config', 'AW-988775825');
+          </script>
 
     <style>
       body {
@@ -119,6 +123,7 @@ const description = "A quiet place. Not everything needs to be explained.";
         display: block;
         text-align: left;
         margin: 1.5rem 0;
+        white-space: pre-line;
       }
 
       .genre {
@@ -154,19 +159,26 @@ const description = "A quiet place. Not everything needs to be explained.";
       </a>
 
       <p class="hidden blurb" id="blurb">
-        The veil between Light and Dark isn’t a myth—it’s real, hidden in plain
-        sight on our own Earth.
-        <br /><br />
-        When Cole stumbles across it and steps through, he discovers too late
-        that return isn’t guaranteed.
-        <br /><br />
-        The two living souls he loves most are left behind on the other side…
-        and every path home drags him deeper into a world shaped by shadows,
-        predators, and choices with irreversible consequences.
-        <br /><br />
-        As he searches for a way back, Cole is forced to confront decisions that
-        challenge his one driving desire: to return home and reclaim his simple
-        life with those he loves.
+        A veil—hidden in plain sight—separates Light from Dark on our own world.
+        
+        Cole Hunter doesn’t find it by accident.
+        He soon learns he was drawn to it.
+        
+        Crossing it was easy. Coming back… isn’t.
+        
+        The life he knew—his wife, Anna… his dog, Dallas—remains on the other side, while every path home pulls him deeper into a realm of predators, power, and consequences that cannot be undone.
+        
+        Soon, Cole realizes something worse than being trapped—
+        leaving may not be an option.
+        
+        Because the fate of countless souls now rests on his shoulders.
+        
+        Faced with a choice between returning to the life he loves or standing against the horrors consuming this world…
+        
+        Cole makes the only choice that matters.
+        
+        He stays.
+        And he fights.
       </p>      
         
        <p class="hidden" id="line3"> 
@@ -185,7 +197,7 @@ const description = "A quiet place. Not everything needs to be explained.";
         id="amazonBtn_2"
         onclick="trackAmazonClick('https://www.amazon.com/dp/B0GCM12FFJ');"
       >
-        Read Free with KU or Buy on Amazon
+        Read Free on Kindle Unlimited or Buy Now on Amazon
       </a>
 
       <a
@@ -249,7 +261,7 @@ const description = "A quiet place. Not everything needs to be explained.";
       setTimeout(() => {
         document.getElementById("amazonProof")?.classList.remove("hidden");
         document.getElementById("amazonProof")?.classList.add("show");
-      }, 1800);
+      }, 1200);
 
      window.trackAmazonClick = function() {
         if (typeof gtag === 'function') {
