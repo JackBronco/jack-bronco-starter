@@ -168,6 +168,10 @@ const description = "A quiet place. Not everything needs to be explained.";
         Some things are meant to be stepped into.
       </p>
 
+      <p class="hidden" id="hook">
+      A Supernatural Thriller of Faith, Power, and War Beyond the Veil
+      </p>
+
        <a
         href="https://www.amazon.com/dp/B0GCM12FFJ"
         target="_blank"
@@ -251,6 +255,12 @@ const description = "A quiet place. Not everything needs to be explained.";
         document.getElementById("line2")?.classList.remove("hidden");
         document.getElementById("line2")?.classList.add("show");
       }, 600);
+
+      setTimeout(() => {
+        document.getElementById("hook")?.classList.remove("hidden");
+        document.getElementById("hook")?.classList.add("show");
+      }, 650);
+
 
       setTimeout(() => {
         document.getElementById("amazonBtn")?.classList.remove("hidden");
