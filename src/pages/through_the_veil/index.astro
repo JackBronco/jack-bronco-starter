@@ -76,6 +76,14 @@ const description = "A quiet place. Not everything needs to be explained.";
         margin-bottom: 1rem;
       }
 
+      h2 {
+        font-size: 1.4rem;
+        font-weight: 600;
+        line-height: 1.4;
+        margin: 1.5rem 0;
+        letter-spacing: 0.02em;
+      }
+
       p {
         opacity: 0.7;
         line-height: 1.6;
@@ -186,6 +194,12 @@ const description = "A quiet place. Not everything needs to be explained.";
         Read Free on Kindle Unlimited or Buy Now on Amazon
       </a>
 
+      <h2 class="hidden" id="hook_2">
+      The rules that hold this world in balance have been broken.
+      <br>
+      Only one can set it right.
+      </h1>
+
       <p class="hidden blurb" id="blurb">
         A Veil exists on our world.
 
@@ -275,6 +289,11 @@ const description = "A quiet place. Not everything needs to be explained.";
         document.getElementById("hook")?.classList.remove("hidden");
         document.getElementById("hook")?.classList.add("show");
       }, 650);
+
+      setTimeout(() => {
+        document.getElementById("hook_2")?.classList.remove("hidden");
+        document.getElementById("hook_2")?.classList.add("show");
+      }, 675);
 
 
       setTimeout(() => {
