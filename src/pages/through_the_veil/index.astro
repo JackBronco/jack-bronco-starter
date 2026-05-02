@@ -84,6 +84,15 @@ const description = "A quiet place. Not everything needs to be explained.";
         letter-spacing: 0.02em;
       }
 
+      h3 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        line-height: 1.4;
+        margin: 1.5rem 0;
+        letter-spacing: 0.02em;
+      }
+
+
       p {
         opacity: 0.7;
         line-height: 1.6;
@@ -233,11 +242,11 @@ const description = "A quiet place. Not everything needs to be explained.";
         Not everything is meant to be explained right away.
        </p>
 
-      <h2 class="hidden" id="hook2">
+      <h3 class="hidden" id="hook3">
       <br>
       Unfold The Mystery That...Awaits
       <br>
-      </h2>
+      </h3>
 
       <p class="hidden genre" id="genreLine"> 
         A Fast-Paced, Unrelenting<br>
@@ -339,6 +348,12 @@ const description = "A quiet place. Not everything needs to be explained.";
         document.getElementById("amazonProof")?.classList.remove("hidden");
         document.getElementById("amazonProof")?.classList.add("show");
       }, 1200);
+
+      setTimeout(() => {
+        document.getElementById("hook3")?.classList.remove("hidden");
+        document.getElementById("hook3")?.classList.add("show");
+      }, 1600);
+
 
      function trackAmazonClick(url) {
         window.uetq = window.uetq || [];
